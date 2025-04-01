@@ -58,6 +58,7 @@
     </style>
 </head>
 <body>
+
     <div class="logo">
        <img src="https://github.com/maxiosta10/EatViandas/blob/main/logo.png?raw=true" alt="Logo Eat Viandas">
     </div>
@@ -70,78 +71,62 @@
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
 
-            <!-- Bloques de días sin ocultar -->
             <div class="day-block">
-                <h3>Lunes</h3>
-                <label for="dia1">Día:</label>
+                <label for="dia1">Lunes:</label>
                 <input type="date" id="dia1" name="dia1" value="" disabled>
-
                 <label for="menu1">Menú:</label>
                 <select id="menu1" name="menu1" required>
                     <option value="M1">M1</option>
                     <option value="M2">M2</option>
                 </select>
-
                 <label for="cantidad1">Cantidad:</label>
                 <input type="number" id="cantidad1" name="cantidad1" value="1" required>
             </div>
 
             <div class="day-block">
-                <h3>Martes</h3>
-                <label for="dia2">Día:</label>
+                <label for="dia2">Martes:</label>
                 <input type="date" id="dia2" name="dia2" value="" disabled>
-
                 <label for="menu2">Menú:</label>
                 <select id="menu2" name="menu2" required>
                     <option value="M1">M1</option>
                     <option value="M2">M2</option>
                 </select>
-
                 <label for="cantidad2">Cantidad:</label>
                 <input type="number" id="cantidad2" name="cantidad2" value="1" required>
             </div>
 
             <div class="day-block">
-                <h3>Miércoles</h3>
-                <label for="dia3">Día:</label>
+                <label for="dia3">Miércoles:</label>
                 <input type="date" id="dia3" name="dia3" value="" disabled>
-
                 <label for="menu3">Menú:</label>
                 <select id="menu3" name="menu3" required>
                     <option value="M1">M1</option>
                     <option value="M2">M2</option>
                 </select>
-
                 <label for="cantidad3">Cantidad:</label>
                 <input type="number" id="cantidad3" name="cantidad3" value="1" required>
             </div>
 
             <div class="day-block">
-                <h3>Jueves</h3>
-                <label for="dia4">Día:</label>
+                <label for="dia4">Jueves:</label>
                 <input type="date" id="dia4" name="dia4" value="" disabled>
-
                 <label for="menu4">Menú:</label>
                 <select id="menu4" name="menu4" required>
                     <option value="M1">M1</option>
                     <option value="M2">M2</option>
                 </select>
-
                 <label for="cantidad4">Cantidad:</label>
                 <input type="number" id="cantidad4" name="cantidad4" value="1" required>
             </div>
 
             <div class="day-block">
-                <h3>Viernes</h3>
-                <label for="dia5">Día:</label>
+                <label for="dia5">Viernes:</label>
                 <input type="date" id="dia5" name="dia5" value="" disabled>
-
                 <label for="menu5">Menú:</label>
                 <select id="menu5" name="menu5" required>
                     <option value="M1">M1</option>
                     <option value="M2">M2</option>
                 </select>
-
                 <label for="cantidad5">Cantidad:</label>
                 <input type="number" id="cantidad5" name="cantidad5" value="1" required>
             </div>
@@ -150,22 +135,6 @@
         </form>
     </div>
 
-    <script>
-        function getNextDate(currentDate) {
-            const nextDate = new Date(currentDate);
-            nextDate.setDate(nextDate.getDate() + 1);
-            return nextDate.toISOString().split('T')[0];
-        }
-
-        const today = new Date();
-        const days = ['dia1', 'dia2', 'dia3', 'dia4', 'dia5'];
-
-        document.getElementById(days[0]).value = today.toISOString().split('T')[0];
-        for (let i = 1; i < days.length; i++) {
-            const nextDay = getNextDate(today);
-            document.getElementById(days[i]).value = nextDay;
-            today.setDate(today.getDate() + 1);
-        }
-    </script>
 </body>
 </html>
+
