@@ -58,13 +58,12 @@
     </style>
 </head>
 <body>
-
     <div class="logo">
-       <img src="https://github.com/maxiosta10/EatViandas/blob/main/logo.png?raw=true" alt="Logo Eat Viandas">
+        <img src="https://github.com/maxiosta10/EatViandas/blob/main/logo.png?raw=true" alt="Logo Eat Viandas">
     </div>
 
     <div class="form-container">
-        <form action="https://script.google.com/macros/s/AKfycbywF3BnJk3ihcEpKPHkGYC4RnnlEb9JXVcEefjJFFm5wgar9Z5IV7Xu6U7Vz2qnbU7U/exec" method="POST">
+        <form action="#" method="POST">
             <label for="empresa">Empresa:</label>
             <input type="text" id="empresa" name="empresa" required>
 
@@ -73,7 +72,7 @@
 
             <div class="day-block">
                 <label for="dia1">Lunes:</label>
-                <input type="date" id="dia1" name="dia1" value="" disabled>
+                <input type="date" id="dia1" name="dia1" required>
                 <label for="menu1">Menú:</label>
                 <select id="menu1" name="menu1" required>
                     <option value="M1">M1</option>
@@ -82,10 +81,10 @@
                 <label for="cantidad1">Cantidad:</label>
                 <input type="number" id="cantidad1" name="cantidad1" value="1" required>
             </div>
-
+            
             <div class="day-block">
                 <label for="dia2">Martes:</label>
-                <input type="date" id="dia2" name="dia2" value="" disabled>
+                <input type="date" id="dia2" name="dia2" required>
                 <label for="menu2">Menú:</label>
                 <select id="menu2" name="menu2" required>
                     <option value="M1">M1</option>
@@ -97,7 +96,7 @@
 
             <div class="day-block">
                 <label for="dia3">Miércoles:</label>
-                <input type="date" id="dia3" name="dia3" value="" disabled>
+                <input type="date" id="dia3" name="dia3" required>
                 <label for="menu3">Menú:</label>
                 <select id="menu3" name="menu3" required>
                     <option value="M1">M1</option>
@@ -106,10 +105,10 @@
                 <label for="cantidad3">Cantidad:</label>
                 <input type="number" id="cantidad3" name="cantidad3" value="1" required>
             </div>
-
+            
             <div class="day-block">
                 <label for="dia4">Jueves:</label>
-                <input type="date" id="dia4" name="dia4" value="" disabled>
+                <input type="date" id="dia4" name="dia4" required>
                 <label for="menu4">Menú:</label>
                 <select id="menu4" name="menu4" required>
                     <option value="M1">M1</option>
@@ -118,10 +117,10 @@
                 <label for="cantidad4">Cantidad:</label>
                 <input type="number" id="cantidad4" name="cantidad4" value="1" required>
             </div>
-
+            
             <div class="day-block">
                 <label for="dia5">Viernes:</label>
-                <input type="date" id="dia5" name="dia5" value="" disabled>
+                <input type="date" id="dia5" name="dia5" required>
                 <label for="menu5">Menú:</label>
                 <select id="menu5" name="menu5" required>
                     <option value="M1">M1</option>
@@ -135,6 +134,30 @@
         </form>
     </div>
 
+    <script>
+        function getNextMonday() {
+            const today = new Date();
+            const day = today.getDay();
+            const diff = day === 1 ? 0 : (day === 0 ? 1 : 8 - day);
+            today.setDate(today.getDate() + diff);
+            return today;
+        }
+
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        function initializeDates() {
+            let monday = getNextMonday();
+            for (let i = 0; i < 5; i++) {
+                document.getElementById(`dia${i + 1}`).value = formatDate(monday);
+                monday.setDate(monday.getDate() + 1);
+            }
+        }
+
+        window.onload = initializeDates;
+    </script>
 </body>
 </html>
+
 
