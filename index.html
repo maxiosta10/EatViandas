@@ -12,7 +12,7 @@
             padding: 20px;
         }
         .logo img {
-            width: 150px;
+            width: 200px;
             margin-bottom: 20px;
         }
         .form-container {
@@ -20,7 +20,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            max-width: 850px;
             margin: 0 auto;
         }
         label {
@@ -30,20 +30,37 @@
             margin: 10px 0 5px;
         }
         select, input {
-            width: 100%;
+            width: calc(100% - 16px);
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
         .day-block {
             background: #ecf0f1;
             padding: 10px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            text-align: left;
+            border: 2px solid black;
+        }
+        .day-block label, .day-block select, .day-block input {
+            width: 100%;
+        }
+        .full-width {
+            grid-column: span 2;
         }
         button {
-            background-color: #27ae60;
+            background-color: black;
+            color: white; /* Asegura que el texto siga siendo visible */
             color: white;
             padding: 10px;
             border: none;
@@ -51,6 +68,8 @@
             width: 100%;
             font-size: 16px;
             cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
         }
         button:hover {
             background-color: #219150;
@@ -70,71 +89,66 @@
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
 
-            <div class="day-block">
-                <label for="dia1">Lunes:</label>
-                <input type="date" id="dia1" name="dia1" required>
-                <label for="menu1">Menú:</label>
-                <select id="menu1" name="menu1" required>
-                    <option value="M1">M1</option>
-                    <option value="M2">M2</option>
-                </select>
-                <label for="cantidad1">Cantidad:</label>
-                <input type="number" id="cantidad1" name="cantidad1" value="1" required>
+            <div class="grid-container">
+                <div class="day-block">
+                    <label for="dia1">Lunes:</label>
+                    <input type="date" id="dia1" name="dia1" readonly style="width: 200px;">
+                    <label for="menu1">Menú:</label>
+                    <select id="menu1" name="menu1" required>
+                        <option value="M1">M1</option>
+                        <option value="M2">M2</option>
+                    </select>
+                    <label for="cantidad1">Cantidad:</label>
+                    <input type="number" id="cantidad1" name="cantidad1" value="1" readonly style="width: 200px;">
+                </div>
+                <div class="day-block">
+                    <label for="dia2">Martes:</label>
+                    <input type="date" id="dia2" name="dia2" readonly style="width: 200px;">
+                    <label for="menu2">Menú:</label>
+                    <select id="menu2" name="menu2" required>
+                        <option value="M1">M1</option>
+                        <option value="M2">M2</option>
+                    </select>
+                    <label for="cantidad2">Cantidad:</label>
+                    <input type="number" id="cantidad2" name="cantidad2" value="1" readonly style="width: 200px;">
+                </div>
+                <div class="day-block">
+                    <label for="dia3">Miércoles:</label>
+                    <input type="date" id="dia3" name="dia3" readonly style="width: 200px;">
+                    <label for="menu3">Menú:</label>
+                    <select id="menu3" name="menu3" required>
+                        <option value="M1">M1</option>
+                        <option value="M2">M2</option>
+                    </select>
+                    <label for="cantidad3">Cantidad:</label>
+                    <input type="number" id="cantidad3" name="cantidad3" value="1" readonly style="width: 200px;">
+                </div>
+                <div class="day-block">
+                    <label for="dia4">Jueves:</label>
+                    <input type="date" id="dia4" name="dia4" readonly style="width: 200px;">
+                    <label for="menu4">Menú:</label>
+                    <select id="menu4" name="menu4" required>
+                        <option value="M1">M1</option>
+                        <option value="M2">M2</option>
+                    </select>
+                    <label for="cantidad4">Cantidad:</label>
+                    <input type="number" id="cantidad4" name="cantidad4" value="1" readonly style="width: 200px;">
+                </div>
+                <div class="day-block full-width">
+                    <label for="dia5">Viernes:</label>
+                    <input type="date" id="dia5" name="dia5" readonly style="width: 450px;">
+                    <label for="menu5">Menú:</label>
+                    <select id="menu5" name="menu5" required>
+                        <option value="M1">M1</option>
+                        <option value="M2">M2</option>
+                    </select>
+                    <label for="cantidad5">Cantidad:</label>
+                    <input type="number" id="cantidad5" name="cantidad5" value="1" readonly style="width: 450px;">
+                </div>
             </div>
-            
-            <div class="day-block">
-                <label for="dia2">Martes:</label>
-                <input type="date" id="dia2" name="dia2" required>
-                <label for="menu2">Menú:</label>
-                <select id="menu2" name="menu2" required>
-                    <option value="M1">M1</option>
-                    <option value="M2">M2</option>
-                </select>
-                <label for="cantidad2">Cantidad:</label>
-                <input type="number" id="cantidad2" name="cantidad2" value="1" required>
-            </div>
-
-            <div class="day-block">
-                <label for="dia3">Miércoles:</label>
-                <input type="date" id="dia3" name="dia3" required>
-                <label for="menu3">Menú:</label>
-                <select id="menu3" name="menu3" required>
-                    <option value="M1">M1</option>
-                    <option value="M2">M2</option>
-                </select>
-                <label for="cantidad3">Cantidad:</label>
-                <input type="number" id="cantidad3" name="cantidad3" value="1" required>
-            </div>
-            
-            <div class="day-block">
-                <label for="dia4">Jueves:</label>
-                <input type="date" id="dia4" name="dia4" required>
-                <label for="menu4">Menú:</label>
-                <select id="menu4" name="menu4" required>
-                    <option value="M1">M1</option>
-                    <option value="M2">M2</option>
-                </select>
-                <label for="cantidad4">Cantidad:</label>
-                <input type="number" id="cantidad4" name="cantidad4" value="1" required>
-            </div>
-            
-            <div class="day-block">
-                <label for="dia5">Viernes:</label>
-                <input type="date" id="dia5" name="dia5" required>
-                <label for="menu5">Menú:</label>
-                <select id="menu5" name="menu5" required>
-                    <option value="M1">M1</option>
-                    <option value="M2">M2</option>
-                </select>
-                <label for="cantidad5">Cantidad:</label>
-                <input type="number" id="cantidad5" name="cantidad5" value="1" required>
-            </div>
-
             <button type="submit">Enviar Pedido</button>
         </div>
-
     </form>
-
     <script>
         function getNextMonday() {
             const today = new Date();
@@ -143,11 +157,9 @@
             today.setDate(today.getDate() + diff);
             return today;
         }
-
         function formatDate(date) {
             return date.toISOString().split('T')[0];
         }
-
         function initializeDates() {
             let monday = getNextMonday();
             for (let i = 0; i < 5; i++) {
@@ -155,11 +167,11 @@
                 monday.setDate(monday.getDate() + 1);
             }
         }
-
         window.onload = initializeDates;
     </script>
 </body>
 </html>
+
 
 
 
