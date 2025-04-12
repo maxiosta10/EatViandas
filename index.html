@@ -1,177 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eat Viandas - Pedido</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            text-align: center;
-            padding: 20px;
-        }
-        .logo img {
-            width: 200px;
-            margin-bottom: 20px;
-        }
-        .form-container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 850px;
-            margin: 0 auto;
-        }
-        label {
-            display: block;
-            text-align: left;
-            font-weight: bold;
-            margin: 10px 0 5px;
-        }
-        select, input {
-            width: calc(100% - 16px);
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[readonly] {
-            background-color: #e9ecef;
-            cursor: not-allowed;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        .day-block {
-            background: #ecf0f1;
-            padding: 10px;
-            border-radius: 8px;
-            text-align: left;
-            border: 2px solid black;
-        }
-        .day-block label, .day-block select, .day-block input {
-            width: 100%;
-        }
-        .full-width {
-            grid-column: span 2;
-        }
-        button {
-            background-color: black;
-            color: white; /* Asegura que el texto siga siendo visible */
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            width: 100%;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        button:hover {
-            background-color: #219150;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eat Viandas - Pedido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 20px;
+    }
+    .logo img {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+    .form-container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 850px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+    select, input {
+      width: calc(100% - 16px);
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[readonly] {
+      background-color: #e9ecef;
+      cursor: not-allowed;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .day-block {
+      background: #ecf0f1;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: left;
+      border: 2px solid black;
+    }
+    .day-block label, .day-block select, .day-block input {
+      width: 100%;
+    }
+    .full-width {
+      grid-column: span 2;
+    }
+    button {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #219150;
+    }
+  </style>
 </head>
 <body>
-    <div class="logo">
-        <img src="https://github.com/maxiosta10/EatViandas/blob/main/logo.png?raw=true" alt="Logo Eat Viandas">
-    </div>
-    <form action="https://script.google.com/macros/s/AKfycbzOJDQUQFJKcUxVJGvA3gRgAnJ4PtRcvv43rpDSqfjfqD-EeVdcK3a2eBSD9QrGanJI/exec" method="POST">
+  <div class="logo">
+    <img src="https://github.com/maxiosta10/EatViandas/blob/main/logo.png?raw=true" alt="Logo Eat Viandas" />
+  </div>
 
-        <div class="form-container">
-            <label for="empresa">Empresa:</label>
-            <input type="text" id="empresa" name="empresa" required>
+  <form action="https://script.google.com/macros/s/AKfycbzOJDQUQFJKcUxVJGvA3gRgAnJ4PtRcvv43rpDSqfjfqD-EeVdcK3a2eBSD9QrGanJI/exec" method="POST">
+    <div class="form-container">
+      <label for="empresa">Empresa:</label>
+      <input type="text" id="empresa" name="empresa" required />
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
 
-            <div class="grid-container">
-                <div class="day-block">
-                    <label for="dia1">Lunes:</label>
-                    <input type="date" id="dia1" name="dia1" readonly style="width: 200px;">
-                    <label for="menu1">Menú:</label>
-                    <select id="menu1" name="menu1" required>
-                        <option value="M1">M1</option>
-                        <option value="M2">M2</option>
-                    </select>
-                    <label for="cantidad1">Cantidad:</label>
-                    <input type="number" id="cantidad1" name="cantidad1" value="1" readonly style="width: 200px;">
-                </div>
-                <div class="day-block">
-                    <label for="dia2">Martes:</label>
-                    <input type="date" id="dia2" name="dia2" readonly style="width: 200px;">
-                    <label for="menu2">Menú:</label>
-                    <select id="menu2" name="menu2" required>
-                        <option value="M1">M1</option>
-                        <option value="M2">M2</option>
-                    </select>
-                    <label for="cantidad2">Cantidad:</label>
-                    <input type="number" id="cantidad2" name="cantidad2" value="1" readonly style="width: 200px;">
-                </div>
-                <div class="day-block">
-                    <label for="dia3">Miércoles:</label>
-                    <input type="date" id="dia3" name="dia3" readonly style="width: 200px;">
-                    <label for="menu3">Menú:</label>
-                    <select id="menu3" name="menu3" required>
-                        <option value="M1">M1</option>
-                        <option value="M2">M2</option>
-                    </select>
-                    <label for="cantidad3">Cantidad:</label>
-                    <input type="number" id="cantidad3" name="cantidad3" value="1" readonly style="width: 200px;">
-                </div>
-                <div class="day-block">
-                    <label for="dia4">Jueves:</label>
-                    <input type="date" id="dia4" name="dia4" readonly style="width: 200px;">
-                    <label for="menu4">Menú:</label>
-                    <select id="menu4" name="menu4" required>
-                        <option value="M1">M1</option>
-                        <option value="M2">M2</option>
-                    </select>
-                    <label for="cantidad4">Cantidad:</label>
-                    <input type="number" id="cantidad4" name="cantidad4" value="1" readonly style="width: 200px;">
-                </div>
-                <div class="day-block full-width">
-                    <label for="dia5">Viernes:</label>
-                    <input type="date" id="dia5" name="dia5" readonly style="width: 450px;">
-                    <label for="menu5">Menú:</label>
-                    <select id="menu5" name="menu5" required>
-                        <option value="M1">M1</option>
-                        <option value="M2">M2</option>
-                    </select>
-                    <label for="cantidad5">Cantidad:</label>
-                    <input type="number" id="cantidad5" name="cantidad5" value="1" readonly style="width: 450px;">
-                </div>
-            </div>
-            <button type="submit">Enviar Pedido</button>
+      <div class="grid-container">
+        <div class="day-block">
+          <label for="dia1">Lunes:</label>
+          <input type="date" id="dia1" name="dia1" readonly style="width: 200px;" />
+          <label for="menu1">Menú:</label>
+          <select id="menu1" name="menu1" required></select>
+          <label for="cantidad1">Cantidad:</label>
+          <input type="number" id="cantidad1" name="cantidad1" value="1" readonly style="width: 200px;" />
         </div>
-    </form>
-    <script>
-        function getNextMonday() {
-            const today = new Date();
-            const day = today.getDay();
-            const diff = day === 1 ? 0 : (day === 0 ? 1 : 8 - day);
-            today.setDate(today.getDate() + diff);
-            return today;
+        <div class="day-block">
+          <label for="dia2">Martes:</label>
+          <input type="date" id="dia2" name="dia2" readonly style="width: 200px;" />
+          <label for="menu2">Menú:</label>
+          <select id="menu2" name="menu2" required></select>
+          <label for="cantidad2">Cantidad:</label>
+          <input type="number" id="cantidad2" name="cantidad2" value="1" readonly style="width: 200px;" />
+        </div>
+        <div class="day-block">
+          <label for="dia3">Miércoles:</label>
+          <input type="date" id="dia3" name="dia3" readonly style="width: 200px;" />
+          <label for="menu3">Menú:</label>
+          <select id="menu3" name="menu3" required></select>
+          <label for="cantidad3">Cantidad:</label>
+          <input type="number" id="cantidad3" name="cantidad3" value="1" readonly style="width: 200px;" />
+        </div>
+        <div class="day-block">
+          <label for="dia4">Jueves:</label>
+          <input type="date" id="dia4" name="dia4" readonly style="width: 200px;" />
+          <label for="menu4">Menú:</label>
+          <select id="menu4" name="menu4" required></select>
+          <label for="cantidad4">Cantidad:</label>
+          <input type="number" id="cantidad4" name="cantidad4" value="1" readonly style="width: 200px;" />
+        </div>
+        <div class="day-block full-width">
+          <label for="dia5">Viernes:</label>
+          <input type="date" id="dia5" name="dia5" readonly style="width: 450px;" />
+          <label for="menu5">Menú:</label>
+          <select id="menu5" name="menu5" required></select>
+          <label for="cantidad5">Cantidad:</label>
+          <input type="number" id="cantidad5" name="cantidad5" value="1" readonly style="width: 450px;" />
+        </div>
+      </div>
+
+      <button type="submit">Enviar Pedido</button>
+    </div>
+  </form>
+
+  <script>
+    function getNextMonday() {
+      const today = new Date();
+      const day = today.getDay();
+      const diff = day === 1 ? 0 : (day === 0 ? 1 : 8 - day);
+      today.setDate(today.getDate() + diff);
+      return today;
+    }
+
+    function formatDate(date) {
+      return date.toISOString().split('T')[0];
+    }
+
+    function initializeDates() {
+      let monday = getNextMonday();
+      for (let i = 0; i < 5; i++) {
+        document.getElementById(`dia${i + 1}`).value = formatDate(monday);
+        monday.setDate(monday.getDate() + 1);
+      }
+    }
+
+    function getParams() {
+      const params = {};
+      location.search.substr(1).split("&").forEach(function (item) {
+        const [key, value] = item.split("=");
+        if (key) params[key] = decodeURIComponent(value);
+      });
+      return params;
+    }
+
+    function applyParams() {
+      const params = getParams();
+
+      if (params.empresa) {
+        document.getElementById("empresa").value = params.empresa;
+      }
+
+      if (params.menu) {
+        const opciones = params.menu.split(",");
+        for (let i = 1; i <= 5; i++) {
+          const select = document.getElementById(`menu${i}`);
+          select.innerHTML = "";
+          opciones.forEach(op => {
+            const option = document.createElement("option");
+            option.value = op;
+            option.textContent = op;
+            select.appendChild(option);
+          });
         }
-        function formatDate(date) {
-            return date.toISOString().split('T')[0];
-        }
-        function initializeDates() {
-            let monday = getNextMonday();
-            for (let i = 0; i < 5; i++) {
-                document.getElementById(`dia${i + 1}`).value = formatDate(monday);
-                monday.setDate(monday.getDate() + 1);
-            }
-        }
-        window.onload = initializeDates;
-    </script>
+      }
+    }
+
+    window.onload = function () {
+      initializeDates();
+      applyParams();
+    };
+  </script>
 </body>
 </html>
-
 
 
 
