@@ -1,245 +1,154 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario de Pedido</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f9f9f9;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    img.logo {
-      display: block;
-      margin: 0 auto 20px auto;
-      max-width: 200px;
-      height: auto;
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    button {
-      background-color: #28a745;
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 4px;
-      width: 100%;
-      font-size: 16px;
-      cursor: pointer;
-      position: relative;
-    }
-
-    button:disabled {
-      background-color: #94d3a2;
-      cursor: not-allowed;
-    }
-
-    .spinner {
-      display: none;
-      width: 20px;
-      height: 20px;
-      border: 3px solid #fff;
-      border-top: 3px solid #28a745;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      position: absolute;
-      top: 50%;
-      right: 20px;
-      transform: translateY(-50%);
-    }
-
-    @keyframes spin {
-      0% { transform: translateY(-50%) rotate(0deg); }
-      100% { transform: translateY(-50%) rotate(360deg); }
-    }
-
-    .message {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 18px;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <img src="https://i.postimg.cc/0jJxyQTT/logo.png" alt="Logo" class="logo">
-    <h1>Formulario de Pedido</h1>
-
-    <form id="pedidoForm">
-
-      <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-      </div>
-
-      <div class="form-group">
-        <label for="empresa">Empresa:</label>
-        <input type="text" id="empresa" name="empresa" required>
-      </div>
-
-      <div class="form-group">
-        <label for="dia1">Día 1:</label>
-        <input type="text" id="dia1" name="dia1">
-      </div>
-
-      <div class="form-group">
-        <label for="menu1">Menú 1:</label>
-        <input type="text" id="menu1" name="menu1">
-      </div>
-
-      <div class="form-group">
-        <label for="cantidad1">Cantidad 1:</label>
-        <input type="number" id="cantidad1" name="cantidad1" min="0">
-      </div>
-
-      <div class="form-group">
-        <label for="dia2">Día 2:</label>
-        <input type="text" id="dia2" name="dia2">
-      </div>
-
-      <div class="form-group">
-        <label for="menu2">Menú 2:</label>
-        <input type="text" id="menu2" name="menu2">
-      </div>
-
-      <div class="form-group">
-        <label for="cantidad2">Cantidad 2:</label>
-        <input type="number" id="cantidad2" name="cantidad2" min="0">
-      </div>
-
-      <div class="form-group">
-        <label for="dia3">Día 3:</label>
-        <input type="text" id="dia3" name="dia3">
-      </div>
-
-      <div class="form-group">
-        <label for="menu3">Menú 3:</label>
-        <input type="text" id="menu3" name="menu3">
-      </div>
-
-      <div class="form-group">
-        <label for="cantidad3">Cantidad 3:</label>
-        <input type="number" id="cantidad3" name="cantidad3" min="0">
-      </div>
-
-      <div class="form-group">
-        <label for="dia4">Día 4:</label>
-        <input type="text" id="dia4" name="dia4">
-      </div>
-
-      <div class="form-group">
-        <label for="menu4">Menú 4:</label>
-        <input type="text" id="menu4" name="menu4">
-      </div>
-
-      <div class="form-group">
-        <label for="cantidad4">Cantidad 4:</label>
-        <input type="number" id="cantidad4" name="cantidad4" min="0">
-      </div>
-
-      <div class="form-group">
-        <label for="dia5">Día 5:</label>
-        <input type="text" id="dia5" name="dia5">
-      </div>
-
-      <div class="form-group">
-        <label for="menu5">Menú 5:</label>
-        <input type="text" id="menu5" name="menu5">
-      </div>
-
-      <div class="form-group">
-        <label for="cantidad5">Cantidad 5:</label>
-        <input type="number" id="cantidad5" name="cantidad5" min="0">
-      </div>
-
-      <button type="submit" id="submitBtn">
-        Enviar Pedido
-        <div class="spinner" id="spinner"></div>
-      </button>
-
-    </form>
-
-    <div class="message" id="message"></div>
-  </div>
-
-  <script>
-    const form = document.getElementById('pedidoForm');
-    const messageDiv = document.getElementById('message');
-    const submitBtn = document.getElementById('submitBtn');
-    const spinner = document.getElementById('spinner');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      submitBtn.disabled = true;
-      spinner.style.display = 'inline-block';
-      messageDiv.innerHTML = '';
-
-      const formData = new FormData(form);
-      const data = {};
-      formData.forEach((value, key) => {
-        data[key] = value.trim();
-      });
-
-      try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxv2OOQsitkhXrQpkas_fRHlfWjTEEb6oocbA1ZMW55ThaBo88RdNHHKugMtFo8jlSB/exec', {
-          method: 'POST',
-          body: new URLSearchParams(data),
-        });
-
-        const text = await response.text();
-
-        if (response.ok) {
-          messageDiv.innerHTML = `<span style="color:green;">${text}</span>`;
-          form.reset();
-        } else {
-          messageDiv.innerHTML = `<span style="color:red;">Error al enviar el pedido: ${text}</span>`;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Comida</title>
+    <script>
+        // Función para obtener el lunes siguiente
+        function getNextMonday() {
+            const today = new Date();
+            const day = today.getDay();
+            const diff = day === 1 ? 0 : (day === 0 ? 1 : 8 - day);
+            today.setDate(today.getDate() + diff);
+            return today;
         }
-      } catch (error) {
-        messageDiv.innerHTML = `<span style="color:red;">Error de conexión: ${error.message}</span>`;
-      } finally {
-        submitBtn.disabled = false;
-        spinner.style.display = 'none';
-      }
-    });
-  </script>
+
+        // Función para formatear fecha a YYYY-MM-DD
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        // Inicializa los campos de fecha para los días de la semana
+        function initializeDates() {
+            let monday = getNextMonday();
+            for (let i = 0; i < 5; i++) {
+                document.getElementById(`dia${i + 1}`).value = formatDate(monday);
+                monday.setDate(monday.getDate() + 1);
+            }
+        }
+
+        // Función para obtener los parámetros de la URL
+        function getParams() {
+            const params = {};
+            location.search.substr(1).split("&").forEach(function (item) {
+                const [key, value] = item.split("=");
+                if (key) params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Función para aplicar los parámetros de la URL al formulario
+        function applyParams() {
+            const params = getParams();
+
+            if (params.empresa) {
+                document.getElementById("empresa").value = params.empresa;
+            }
+
+            if (params.menu) {
+                const opciones = params.menu.split(",");
+                for (let i = 1; i <= 5; i++) {
+                    const select = document.getElementById(`menu${i}`);
+                    select.innerHTML = "";
+                    opciones.forEach(op => {
+                        const option = document.createElement("option");
+                        option.value = op;
+                        option.textContent = op;
+                        select.appendChild(option);
+                    });
+                }
+            }
+        }
+
+        // Cuando la página se carga, inicializa las fechas y aplica los parámetros
+        window.onload = function () {
+            initializeDates();
+            applyParams();
+        };
+    </script>
+</head>
+<body>
+    <h1>Formulario de Pedido de Comida</h1>
+
+    <form action="https://script.google.com/macros/s/AKfycbxv2OOQsitkhXrQpkas_fRHlfWjTEEb6oocbA1ZMW55ThaBo88RdNHHKugMtFo8jlSB/exec" method="POST">
+        <!-- Nombre -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <!-- Empresa -->
+        <label for="empresa">Empresa:</label>
+        <input type="text" id="empresa" name="empresa" required><br><br>
+
+        <!-- Días y Menús -->
+        <div id="dias-menus">
+            <!-- Día 1 -->
+            <div>
+                <label for="dia1">Día 1:</label>
+                <input type="date" id="dia1" name="dia1"><br><br>
+
+                <label for="menu1">Menú 1:</label>
+                <select id="menu1" name="menu1"></select><br><br>
+
+                <label for="cantidad1">Cantidad:</label>
+                <input type="number" id="cantidad1" name="cantidad1" required><br><br>
+            </div>
+
+            <!-- Día 2 -->
+            <div>
+                <label for="dia2">Día 2:</label>
+                <input type="date" id="dia2" name="dia2"><br><br>
+
+                <label for="menu2">Menú 2:</label>
+                <select id="menu2" name="menu2"></select><br><br>
+
+                <label for="cantidad2">Cantidad:</label>
+                <input type="number" id="cantidad2" name="cantidad2" required><br><br>
+            </div>
+
+            <!-- Día 3 -->
+            <div>
+                <label for="dia3">Día 3:</label>
+                <input type="date" id="dia3" name="dia3"><br><br>
+
+                <label for="menu3">Menú 3:</label>
+                <select id="menu3" name="menu3"></select><br><br>
+
+                <label for="cantidad3">Cantidad:</label>
+                <input type="number" id="cantidad3" name="cantidad3" required><br><br>
+            </div>
+
+            <!-- Día 4 -->
+            <div>
+                <label for="dia4">Día 4:</label>
+                <input type="date" id="dia4" name="dia4"><br><br>
+
+                <label for="menu4">Menú 4:</label>
+                <select id="menu4" name="menu4"></select><br><br>
+
+                <label for="cantidad4">Cantidad:</label>
+                <input type="number" id="cantidad4" name="cantidad4" required><br><br>
+            </div>
+
+            <!-- Día 5 -->
+            <div>
+                <label for="dia5">Día 5:</label>
+                <input type="date" id="dia5" name="dia5"><br><br>
+
+                <label for="menu5">Menú 5:</label>
+                <select id="menu5" name="menu5"></select><br><br>
+
+                <label for="cantidad5">Cantidad:</label>
+                <input type="number" id="cantidad5" name="cantidad5" required><br><br>
+            </div>
+        </div>
+
+        <!-- Botón de Enviar -->
+        <button type="submit">Enviar Pedido</button>
+    </form>
 </body>
 </html>
+
 
 
 
