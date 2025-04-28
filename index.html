@@ -1,199 +1,246 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Eat Viandas - Pedido</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Pedido</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      text-align: center;
+      margin: 0;
       padding: 20px;
+      background-color: #f9f9f9;
     }
-    .logo img {
-      width: 200px;
-      margin-bottom: 20px;
-    }
-    .form-container {
+
+    .container {
+      max-width: 600px;
+      margin: auto;
       background: white;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      max-width: 850px;
-      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
+    img.logo {
+      display: block;
+      margin: 0 auto 20px auto;
+      max-width: 200px;
+      height: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
     label {
       display: block;
-      text-align: left;
+      margin-bottom: 5px;
       font-weight: bold;
-      margin: 10px 0 5px;
     }
-    select, input {
-      width: calc(100% - 16px);
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    input[readonly] {
-      background-color: #e9ecef;
-      cursor: not-allowed;
-    }
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-    .day-block {
-      background: #ecf0f1;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: left;
-      border: 2px solid black;
-    }
-    .day-block label, .day-block select, .day-block input {
+
+    input, select {
       width: 100%;
-    }
-    .full-width {
-      grid-column: span 2;
-    }
-    button {
-      background-color: black;
-      color: white;
       padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 12px;
       border: none;
-      border-radius: 5px;
+      border-radius: 4px;
       width: 100%;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 20px;
-      font-weight: bold;
+      position: relative;
     }
-    button:hover {
-      background-color: #219150;
+
+    button:disabled {
+      background-color: #94d3a2;
+      cursor: not-allowed;
+    }
+
+    .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #fff;
+      border-top: 3px solid #28a745;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
+
+    @keyframes spin {
+      0% { transform: translateY(-50%) rotate(0deg); }
+      100% { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    .message {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 18px;
     }
   </style>
 </head>
+
 <body>
-  <div class="logo">
-    <img src="https://github.com/maxiosta10/EatViandas/blob/main/logo.png?raw=true" alt="Logo Eat Viandas" />
-  </div>
+  <div class="container">
+    <img src="https://i.postimg.cc/0jJxyQTT/logo.png" alt="Logo" class="logo">
+    <h1>Formulario de Pedido</h1>
 
-  <form action="https://script.google.com/macros/s/AKfycbzOJDQUQFJKcUxVJGvA3gRgAnJ4PtRcvv43rpDSqfjfqD-EeVdcK3a2eBSD9QrGanJI/exec" method="POST">
-    <div class="form-container">
-      <label for="empresa">Empresa:</label>
-      <input type="text" id="empresa" name="empresa" required />
+    <form id="pedidoForm">
 
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required />
-
-      <div class="grid-container">
-        <div class="day-block">
-          <label for="dia1">Lunes:</label>
-          <input type="date" id="dia1" name="dia1" readonly style="width: 200px;" />
-          <label for="menu1">Menú:</label>
-          <select id="menu1" name="menu1" required></select>
-          <label for="cantidad1">Cantidad:</label>
-          <input type="number" id="cantidad1" name="cantidad1" value="1" readonly style="width: 200px;" />
-        </div>
-        <div class="day-block">
-          <label for="dia2">Martes:</label>
-          <input type="date" id="dia2" name="dia2" readonly style="width: 200px;" />
-          <label for="menu2">Menú:</label>
-          <select id="menu2" name="menu2" required></select>
-          <label for="cantidad2">Cantidad:</label>
-          <input type="number" id="cantidad2" name="cantidad2" value="1" readonly style="width: 200px;" />
-        </div>
-        <div class="day-block">
-          <label for="dia3">Miércoles:</label>
-          <input type="date" id="dia3" name="dia3" readonly style="width: 200px;" />
-          <label for="menu3">Menú:</label>
-          <select id="menu3" name="menu3" required></select>
-          <label for="cantidad3">Cantidad:</label>
-          <input type="number" id="cantidad3" name="cantidad3" value="1" readonly style="width: 200px;" />
-        </div>
-        <div class="day-block">
-          <label for="dia4">Jueves:</label>
-          <input type="date" id="dia4" name="dia4" readonly style="width: 200px;" />
-          <label for="menu4">Menú:</label>
-          <select id="menu4" name="menu4" required></select>
-          <label for="cantidad4">Cantidad:</label>
-          <input type="number" id="cantidad4" name="cantidad4" value="1" readonly style="width: 200px;" />
-        </div>
-        <div class="day-block full-width">
-          <label for="dia5">Viernes:</label>
-          <input type="date" id="dia5" name="dia5" readonly style="width: 450px;" />
-          <label for="menu5">Menú:</label>
-          <select id="menu5" name="menu5" required></select>
-          <label for="cantidad5">Cantidad:</label>
-          <input type="number" id="cantidad5" name="cantidad5" value="1" readonly style="width: 450px;" />
-        </div>
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
       </div>
 
-      <button type="submit">Enviar Pedido</button>
-    </div>
-  </form>
+      <div class="form-group">
+        <label for="empresa">Empresa:</label>
+        <input type="text" id="empresa" name="empresa" required>
+      </div>
+
+      <div class="form-group">
+        <label for="dia1">Día 1:</label>
+        <input type="text" id="dia1" name="dia1">
+      </div>
+
+      <div class="form-group">
+        <label for="menu1">Menú 1:</label>
+        <input type="text" id="menu1" name="menu1">
+      </div>
+
+      <div class="form-group">
+        <label for="cantidad1">Cantidad 1:</label>
+        <input type="number" id="cantidad1" name="cantidad1" min="0">
+      </div>
+
+      <div class="form-group">
+        <label for="dia2">Día 2:</label>
+        <input type="text" id="dia2" name="dia2">
+      </div>
+
+      <div class="form-group">
+        <label for="menu2">Menú 2:</label>
+        <input type="text" id="menu2" name="menu2">
+      </div>
+
+      <div class="form-group">
+        <label for="cantidad2">Cantidad 2:</label>
+        <input type="number" id="cantidad2" name="cantidad2" min="0">
+      </div>
+
+      <div class="form-group">
+        <label for="dia3">Día 3:</label>
+        <input type="text" id="dia3" name="dia3">
+      </div>
+
+      <div class="form-group">
+        <label for="menu3">Menú 3:</label>
+        <input type="text" id="menu3" name="menu3">
+      </div>
+
+      <div class="form-group">
+        <label for="cantidad3">Cantidad 3:</label>
+        <input type="number" id="cantidad3" name="cantidad3" min="0">
+      </div>
+
+      <div class="form-group">
+        <label for="dia4">Día 4:</label>
+        <input type="text" id="dia4" name="dia4">
+      </div>
+
+      <div class="form-group">
+        <label for="menu4">Menú 4:</label>
+        <input type="text" id="menu4" name="menu4">
+      </div>
+
+      <div class="form-group">
+        <label for="cantidad4">Cantidad 4:</label>
+        <input type="number" id="cantidad4" name="cantidad4" min="0">
+      </div>
+
+      <div class="form-group">
+        <label for="dia5">Día 5:</label>
+        <input type="text" id="dia5" name="dia5">
+      </div>
+
+      <div class="form-group">
+        <label for="menu5">Menú 5:</label>
+        <input type="text" id="menu5" name="menu5">
+      </div>
+
+      <div class="form-group">
+        <label for="cantidad5">Cantidad 5:</label>
+        <input type="number" id="cantidad5" name="cantidad5" min="0">
+      </div>
+
+      <button type="submit" id="submitBtn">
+        Enviar Pedido
+        <div class="spinner" id="spinner"></div>
+      </button>
+
+    </form>
+
+    <div class="message" id="message"></div>
+  </div>
 
   <script>
-    function getNextMonday() {
-      const today = new Date();
-      const day = today.getDay();
-      const diff = day === 1 ? 0 : (day === 0 ? 1 : 8 - day);
-      today.setDate(today.getDate() + diff);
-      return today;
-    }
+    const form = document.getElementById('pedidoForm');
+    const messageDiv = document.getElementById('message');
+    const submitBtn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('spinner');
 
-    function formatDate(date) {
-      return date.toISOString().split('T')[0];
-    }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    function initializeDates() {
-      let monday = getNextMonday();
-      for (let i = 0; i < 5; i++) {
-        document.getElementById(`dia${i + 1}`).value = formatDate(monday);
-        monday.setDate(monday.getDate() + 1);
-      }
-    }
+      submitBtn.disabled = true;
+      spinner.style.display = 'inline-block';
+      messageDiv.innerHTML = '';
 
-    function getParams() {
-      const params = {};
-      location.search.substr(1).split("&").forEach(function (item) {
-        const [key, value] = item.split("=");
-        if (key) params[key] = decodeURIComponent(value);
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value.trim();
       });
-      return params;
-    }
 
-    function applyParams() {
-      const params = getParams();
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxv2OOQsitkhXrQpkas_fRHlfWjTEEb6oocbA1ZMW55ThaBo88RdNHHKugMtFo8jlSB/exec', {
+          method: 'POST',
+          body: new URLSearchParams(data),
+        });
 
-      if (params.empresa) {
-        document.getElementById("empresa").value = params.empresa;
-      }
+        const text = await response.text();
 
-      if (params.menu) {
-        const opciones = params.menu.split(",");
-        for (let i = 1; i <= 5; i++) {
-          const select = document.getElementById(`menu${i}`);
-          select.innerHTML = "";
-          opciones.forEach(op => {
-            const option = document.createElement("option");
-            option.value = op;
-            option.textContent = op;
-            select.appendChild(option);
-          });
+        if (response.ok) {
+          messageDiv.innerHTML = `<span style="color:green;">${text}</span>`;
+          form.reset();
+        } else {
+          messageDiv.innerHTML = `<span style="color:red;">Error al enviar el pedido: ${text}</span>`;
         }
+      } catch (error) {
+        messageDiv.innerHTML = `<span style="color:red;">Error de conexión: ${error.message}</span>`;
+      } finally {
+        submitBtn.disabled = false;
+        spinner.style.display = 'none';
       }
-    }
-
-    window.onload = function () {
-      initializeDates();
-      applyParams();
-    };
+    });
   </script>
 </body>
 </html>
+
 
 
 
