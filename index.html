@@ -183,16 +183,15 @@ function applyParams() {
 
 async function loadMenuOptions() {
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycby-4zuQxB_ioYXKxS73BnTU4ODB1q7w9Jjc8fWI5ufsNGrsQbr6XGs8b7_l5DsqPagQrA/exec');
-    
-    const opciones = await response.json(); // ✅ Ahora sí podés hacer .json() porque CORS funciona
-
+    const response = await fetch('https://script.google.com/macros/s/AKfycbyePQESQMJi0EGpOTcYYj1HOzaoTiJ0FaAltt7ICwZ03eGqVWaOHqUjYyrvViNfEa9IlQ/exec');
+    const opciones = await response.json();
     console.log('Opciones de menú cargadas:', opciones);
 
     if (opciones.length > 0) {
       for (let i = 1; i <= 5; i++) {
         const select = document.getElementById(`menu${i}`);
-        select.innerHTML = "";
+        select.innerHTML = "";  // Limpia las opciones existentes
+
         opciones.forEach(op => {
           const option = document.createElement("option");
           option.value = op;
@@ -217,8 +216,8 @@ async function loadMenuOptions() {
 
 window.onload = function () {
   initializeDates();
-  applyParams();
-  loadMenuOptions(); // 👈 Ahora sí carga los menús
+  applyParams(); // Cargar la empresa
+  loadMenuOptions(); // Cargar los menús desde el Google Apps Script
 };
 </script>
 
