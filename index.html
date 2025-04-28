@@ -183,13 +183,33 @@ function applyParams() {
 
 async function loadMenuOptions() {
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzs8ni6EeG51CK115-8z7erAjCo85vt4sI6CT1RQrjIHxoM7q07kQdfEguzGMnIyoAIig/exec', {
-      method: 'GET',
-      mode: 'no-cors' // 🛑 Recordá que no vas a poder leer el contenido
-    });
-
-    console.log("Fetch realizado (no podemos leer el contenido en 'no-cors')");
+    const response = await fetch('https://script.google.com/macros/s/AKfycbzs8ni6EeG51CK115-8z7erAjCo85vt4sI6CT1RQrjIHxoM7q07kQdfEguzGMnIyoAIig/exec');
     
+    const opciones = await response.json(); // ✅ Ahora sí podés hacer .json() porque CORS funciona
+
+    console.log('Opciones de menú cargadas:', opciones);
+
+    if (opciones.length > 0) {
+      for (let i = 1; i <= 5; i++) {
+        const select = document.getElementById(`menu${i}`);
+        select.innerHTML = "";
+        opciones.forEach(op => {
+          const option = document.createElement("option");
+          option.value = op;
+          option.textContent = op;
+          select.appendChild(option);
+        });
+      }
+    } else {
+      console.log("No hay menús disponibles");
+      for (let i = 1; i <= 5; i++) {
+        const select = document.getElementById(`menu${i}`);
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "No hay menús disponibles";
+        select.appendChild(option);
+      }
+    }
   } catch (error) {
     console.error('Error cargando los menús:', error);
   }
@@ -198,7 +218,7 @@ async function loadMenuOptions() {
 window.onload = function () {
   initializeDates();
   applyParams();
-  loadMenuOptions();
+  loadMenuOptions(); // 👈 Ahora sí carga los menús
 };
 </script>
 
