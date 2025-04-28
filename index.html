@@ -5,57 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Eat Viandas - Pedido</title>
   <style>
-    /* Estilos CSS básicos */
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
-    .logo {
+      background-color: #f8f9fa;
       text-align: center;
-      margin-bottom: 20px;
+      padding: 20px;
     }
     .logo img {
-      max-width: 200px;
+      width: 200px;
+      margin-bottom: 20px;
     }
     .form-container {
-      background-color: white;
+      background: white;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 850px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+    select, input {
+      width: calc(100% - 16px);
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[readonly] {
+      background-color: #e9ecef;
+      cursor: not-allowed;
     }
     .grid-container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
     }
     .day-block {
-      display: flex;
-      flex-direction: column;
+      background: #ecf0f1;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: left;
+      border: 2px solid black;
     }
-    label {
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-    input[type="text"], input[type="date"], input[type="number"], select {
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background-color: #28a745;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+    .day-block label, .day-block select, .day-block input {
       width: 100%;
     }
+    .full-width {
+      grid-column: span 2;
+    }
+    button {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: bold;
+    }
     button:hover {
-      background-color: #218838;
+      background-color: #219150;
     }
   </style>
 </head>
@@ -64,7 +80,7 @@
     <img src="https://github.com/maxiosta10/EatViandas/blob/main/logo.png?raw=true" alt="Logo Eat Viandas" />
   </div>
 
-  <form id="pedido-form" action="https://script.google.com/macros/s/AKfycbxv2OOQsitkhXrQpkas_fRHlfWjTEEb6oocbA1ZMW55ThaBo88RdNHHKugMtFo8jlSB/exec" method="POST">
+  <form action="https://script.google.com/macros/s/AKfycbzOJDQUQFJKcUxVJGvA3gRgAnJ4PtRcvv43rpDSqfjfqD-EeVdcK3a2eBSD9QrGanJI/exec" method="POST">
     <div class="form-container">
       <label for="empresa">Empresa:</label>
       <input type="text" id="empresa" name="empresa" required />
@@ -105,13 +121,13 @@
           <label for="cantidad4">Cantidad:</label>
           <input type="number" id="cantidad4" name="cantidad4" value="1" readonly style="width: 200px;" />
         </div>
-        <div class="day-block">
+        <div class="day-block full-width">
           <label for="dia5">Viernes:</label>
-          <input type="date" id="dia5" name="dia5" readonly style="width: 200px;" />
+          <input type="date" id="dia5" name="dia5" readonly style="width: 450px;" />
           <label for="menu5">Menú:</label>
           <select id="menu5" name="menu5" required></select>
           <label for="cantidad5">Cantidad:</label>
-          <input type="number" id="cantidad5" name="cantidad5" value="1" readonly style="width: 200px;" />
+          <input type="number" id="cantidad5" name="cantidad5" value="1" readonly style="width: 450px;" />
         </div>
       </div>
 
@@ -120,42 +136,64 @@
   </form>
 
   <script>
-    // URL del Web App de Google Apps Script
-    const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyqFUYBsAx7W5ZGR0Q_Hc5JQVGp2N0QFbGo9vg3AFP-ZrdDA7Dwmr2ZJu-Jn1WZBOD9YQ/exec';
+    function getNextMonday() {
+      const today = new Date();
+      const day = today.getDay();
+      const diff = day === 1 ? 0 : (day === 0 ? 1 : 8 - day);
+      today.setDate(today.getDate() + diff);
+      return today;
+    }
 
-    // Función para llenar los menús en los select
-    function populateMenus(menus) {
-      // Llena los select con las opciones de los menús
-      for (let i = 1; i <= 5; i++) {
-        let select = document.getElementById(`menu${i}`);
-        menus.forEach(menu => {
-          let option = document.createElement("option");
-          option.value = menu;
-          option.textContent = menu;
-          select.appendChild(option);
-        });
+    function formatDate(date) {
+      return date.toISOString().split('T')[0];
+    }
+
+    function initializeDates() {
+      let monday = getNextMonday();
+      for (let i = 0; i < 5; i++) {
+        document.getElementById(`dia${i + 1}`).value = formatDate(monday);
+        monday.setDate(monday.getDate() + 1);
       }
     }
 
-    // Llamada AJAX para obtener los menús desde el Google Apps Script
-    function fetchMenus() {
-      fetch(googleScriptUrl)
-        .then(response => response.json())
-        .then(data => {
-          populateMenus(data); // Llama a la función para llenar los dropdowns
-        })
-        .catch(error => console.error('Error al obtener menús:', error));
+    function getParams() {
+      const params = {};
+      location.search.substr(1).split("&").forEach(function (item) {
+        const [key, value] = item.split("=");
+        if (key) params[key] = decodeURIComponent(value);
+      });
+      return params;
     }
 
-    window.onload = function() {
-      fetchMenus(); // Cargar los menús al cargar la página
+    function applyParams() {
+      const params = getParams();
+
+      if (params.empresa) {
+        document.getElementById("empresa").value = params.empresa;
+      }
+
+      if (params.menu) {
+        const opciones = params.menu.split(",");
+        for (let i = 1; i <= 5; i++) {
+          const select = document.getElementById(`menu${i}`);
+          select.innerHTML = "";
+          opciones.forEach(op => {
+            const option = document.createElement("option");
+            option.value = op;
+            option.textContent = op;
+            select.appendChild(option);
+          });
+        }
+      }
+    }
+
+    window.onload = function () {
+      initializeDates();
+      applyParams();
     };
   </script>
 </body>
 </html>
-
-
-
 
 
 
