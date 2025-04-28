@@ -165,42 +165,49 @@
       }
     }
 
-    function getParams() {
-      const params = {};
-      location.search.substr(1).split("&").forEach(function (item) {
-        const [key, value] = item.split("=");
-        if (key) params[key] = decodeURIComponent(value);
-      });
-      return params;
+   function getParams() {
+    const params = {};
+    location.search.substr(1).split("&").forEach(function (item) {
+      const [key, value] = item.split("=");
+      if (key) params[key] = decodeURIComponent(value);
+    });
+    return params;
+  }
+
+  function applyParams() {
+    const params = getParams();
+
+    if (params.empresa) {
+      document.getElementById("empresa").value = params.empresa;
     }
+  }
 
-    function applyParams() {
-      const params = getParams();
+  async function loadMenuOptions() {
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbwVz21v3fkZM7f_Dk2zoIjvAyDwhAQPLpltuhE7Sm8p1aVw6nOost70TmMIxb3ukT2Oog/exec'); // <-- URL del WebApp que lee el Spreadsheet
+      const opciones = await response.json();
 
-      if (params.empresa) {
-        document.getElementById("empresa").value = params.empresa;
+      for (let i = 1; i <= 5; i++) {
+        const select = document.getElementById(`menu${i}`);
+        select.innerHTML = "";
+        opciones.forEach(op => {
+          const option = document.createElement("option");
+          option.value = op;
+          option.textContent = op;
+          select.appendChild(option);
+        });
       }
-
-      if (params.menu) {
-        const opciones = params.menu.split(",");
-        for (let i = 1; i <= 5; i++) {
-          const select = document.getElementById(`menu${i}`);
-          select.innerHTML = "";
-          opciones.forEach(op => {
-            const option = document.createElement("option");
-            option.value = op;
-            option.textContent = op;
-            select.appendChild(option);
-          });
-        }
-      }
+    } catch (error) {
+      console.error('Error cargando menús:', error);
     }
+  }
 
-    window.onload = function () {
-      initializeDates();
-      applyParams();
-    };
-  </script>
+  window.onload = function () {
+    initializeDates();
+    applyParams();    // Carga la empresa
+    loadMenuOptions(); // Carga los menús desde la Google Sheet
+  };
+</script>
 </body>
 </html>
 
