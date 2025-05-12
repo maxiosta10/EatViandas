@@ -1,66 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eat Viandas - Pedido</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f8f9fa;
-      text-align: center;
       padding: 20px;
+      margin: 0;
+      text-align: center;
     }
     .logo img {
       width: 200px;
       margin-bottom: 20px;
     }
     .form-container {
-      background: white;
+      background: #fff;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      max-width: 850px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      max-width: 900px;
       margin: 0 auto;
+      text-align: left;
     }
     label {
       display: block;
-      text-align: left;
       font-weight: bold;
       margin: 10px 0 5px;
     }
-    select, input {
-      width: calc(100% - 16px);
+    input[type="text"], input[type="date"], input[type="number"], select {
+      width: 100%;
       padding: 8px;
       margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      box-sizing: border-box;
     }
     input[readonly] {
       background-color: #e9ecef;
       cursor: not-allowed;
     }
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-    .day-block {
-      background: #ecf0f1;
-      padding: 10px;
+    .bloque {
+      background: #f5f3eb; /* beige claro */
+      margin: 10px 0;
       border-radius: 8px;
-      text-align: left;
-      border: 2px solid black;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .day-block label, .day-block select, .day-block input {
-      width: 100%;
+    .titulo {
+      background-color: #d8e2c4; /* verde beige suave */
+      color: #333;
+      padding: 15px;
+      cursor: pointer;
+      user-select: none;
     }
-    .full-width {
-      grid-column: span 2;
+    .contenido {
+      display: none;
+      padding: 15px;
     }
     button {
-      background-color: black;
-      color: white;
+      background-color: #000;
+      color: #fff;
       padding: 10px;
       border: none;
       border-radius: 5px;
@@ -71,12 +73,9 @@
       font-weight: bold;
     }
     button:hover {
-      background-color: #219150;
+      background-color: #333;
     }
     @media (max-width: 600px) {
-      .grid-container {
-        grid-template-columns: 1fr;
-      }
       .form-container {
         padding: 15px;
         margin: 10px;
@@ -86,141 +85,163 @@
 </head>
 <body>
   <div class="logo">
-    <img src="https://github.com/maxiosta10/EatViandas/blob/main/logo.png?raw=true" alt="Logo Eat Viandas" />
+    <img src="https://github.com/maxiosta10/EatViandas/blob/main/logo.png?raw=true" alt="Logo Eat Viandas">
   </div>
 
-  <form action="https://script.google.com/macros/s/AKfycbzCQ3y5yW-evfA67mVZ9-BRmKDy5ZVS-FfjmC-wqjKFpCEsgeAeENi0d5xd4NJ37N3X/exec" method="POST">
+  <form id="pedidoForm" action="https://script.google.com/macros/s/AKfycbzCQ3y5yW-evfA67mVZ9-BRmKDy5ZVS-FfjmC-wqjKFpCEsgeAeENi0d5xd4NJ37N3X/exec" method="POST">
     <div class="form-container">
       <label for="empresa">Empresa:</label>
-      <input type="text" id="empresa" name="empresa" required />
+      <input type="text" id="empresa" name="empresa" required>
 
       <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required />
+      <input type="text" id="nombre" name="nombre" required>
 
-      <div class="grid-container">
-        <div class="day-block">
-          <label for="dia1">Lunes:</label>
-          <input type="date" id="dia1" name="dia1" readonly style="width: 200px;" />
+      <!-- Bloques por día de lunes a viernes -->
+      <div class="bloque">
+        <div class="titulo">Lunes</div>
+        <div class="contenido">
+          <label for="dia1">Fecha:</label>
+          <input type="date" id="dia1" name="dia1" readonly>
           <label for="menu1">Menú:</label>
           <select id="menu1" name="menu1" required></select>
           <label for="cantidad1">Cantidad:</label>
-          <input type="number" id="cantidad1" name="cantidad1" value="1" readonly style="width: 200px;" />
-        </div>
-        <div class="day-block">
-          <label for="dia2">Martes:</label>
-          <input type="date" id="dia2" name="dia2" readonly style="width: 200px;" />
-          <label for="menu2">Menú:</label>
-          <select id="menu2" name="menu2" required></select>
-          <label for="cantidad2">Cantidad:</label>
-          <input type="number" id="cantidad2" name="cantidad2" value="1" readonly style="width: 200px;" />
-        </div>
-        <div class="day-block">
-          <label for="dia3">Miércoles:</label>
-          <input type="date" id="dia3" name="dia3" readonly style="width: 200px;" />
-          <label for="menu3">Menú:</label>
-          <select id="menu3" name="menu3" required></select>
-          <label for="cantidad3">Cantidad:</label>
-          <input type="number" id="cantidad3" name="cantidad3" value="1" readonly style="width: 200px;" />
-        </div>
-        <div class="day-block">
-          <label for="dia4">Jueves:</label>
-          <input type="date" id="dia4" name="dia4" readonly style="width: 200px;" />
-          <label for="menu4">Menú:</label>
-          <select id="menu4" name="menu4" required></select>
-          <label for="cantidad4">Cantidad:</label>
-          <input type="number" id="cantidad4" name="cantidad4" value="1" readonly style="width: 200px;" />
-        </div>
-        <div class="day-block full-width">
-          <label for="dia5">Viernes:</label>
-          <input type="date" id="dia5" name="dia5" readonly style="width: 450px;" />
-          <label for="menu5">Menú:</label>
-          <select id="menu5" name="menu5" required></select>
-          <label for="cantidad5">Cantidad:</label>
-          <input type="number" id="cantidad5" name="cantidad5" value="1" readonly style="width: 450px;" />
+          <input type="number" id="cantidad1" name="cantidad1" value="1" readonly>
         </div>
       </div>
 
-      <button type="submit">Enviar Pedido</button>
+      <div class="bloque">
+        <div class="titulo">Martes</div>
+        <div class="contenido">
+          <label for="dia2">Fecha:</label>
+          <input type="date" id="dia2" name="dia2" readonly>
+          <label for="menu2">Menú:</label>
+          <select id="menu2" name="menu2" required></select>
+          <label for="cantidad2">Cantidad:</label>
+          <input type="number" id="cantidad2" name="cantidad2" value="1" readonly>
+        </div>
+      </div>
+
+      <div class="bloque">
+        <div class="titulo">Miércoles</div>
+        <div class="contenido">
+          <label for="dia3">Fecha:</label>
+          <input type="date" id="dia3" name="dia3" readonly>
+          <label for="menu3">Menú:</label>
+          <select id="menu3" name="menu3" required></select>
+          <label for="cantidad3">Cantidad:</label>
+          <input type="number" id="cantidad3" name="cantidad3" value="1" readonly>
+        </div>
+      </div>
+
+      <div class="bloque">
+        <div class="titulo">Jueves</div>
+        <div class="contenido">
+          <label for="dia4">Fecha:</label>
+          <input type="date" id="dia4" name="dia4" readonly>
+          <label for="menu4">Menú:</label>
+          <select id="menu4" name="menu4" required></select>
+          <label for="cantidad4">Cantidad:</label>
+          <input type="number" id="cantidad4" name="cantidad4" value="1" readonly>
+        </div>
+      </div>
+
+      <div class="bloque">
+        <div class="titulo">Viernes</div>
+        <div class="contenido">
+          <label for="dia5">Fecha:</label>
+          <input type="date" id="dia5" name="dia5" readonly>
+          <label for="menu5">Menú:</label>
+          <select id="menu5" name="menu5" required></select>
+          <label for="cantidad5">Cantidad:</label>
+          <input type="number" id="cantidad5" name="cantidad5" value="1" readonly>
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn">Enviar Pedido</button>
     </div>
   </form>
 
   <script>
-function getNextMonday() {
-  const today = new Date();
-  const day = today.getDay();
-  const diff = day === 1 ? 0 : (day === 0 ? 1 : 8 - day);
-  today.setDate(today.getDate() + diff);
-  return today;
-}
+    function getNextMonday() {
+      const today = new Date();
+      const day = today.getDay();
+      const diff = day === 1 ? 0 : (day === 0 ? 1 : 8 - day);
+      today.setDate(today.getDate() + diff);
+      return today;
+    }
 
-function formatDate(date) {
-  return date.toISOString().split('T')[0];
-}
+    function formatDate(date) {
+      return date.toISOString().split('T')[0];
+    }
 
-function initializeDates() {
-  let monday = getNextMonday();
-  for (let i = 0; i < 5; i++) {
-    document.getElementById(`dia${i + 1}`).value = formatDate(monday);
-    monday.setDate(monday.getDate() + 1);
-  }
-}
-
-function getParams() {
-  const params = {};
-  location.search.substr(1).split("&").forEach(function (item) {
-    const [key, value] = item.split("=");
-    if (key) params[key] = decodeURIComponent(value);
-  });
-  return params;
-}
-
-function applyParams() {
-  const params = getParams();
-  if (params.empresa) {
-    document.getElementById("empresa").value = params.empresa;
-  }
-}
-
-async function loadMenuOptions() {
-  try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbxwQoI2iXhYldiJhVxHZzEUh6BnpHrJ6D47lIz_9lHqJAgCh7FOEDF1PXydhmDU69mi-g/exec');
-    const opciones = await response.json();
-    console.log('Opciones de menú cargadas:', opciones);
-
-    if (opciones.length > 0) {
+    function initializeDates() {
+      let monday = getNextMonday();
       for (let i = 1; i <= 5; i++) {
-        const select = document.getElementById(`menu${i}`);
-        select.innerHTML = "";  // Limpia las opciones existentes
-
-        opciones.forEach(op => {
-          const option = document.createElement("option");
-          option.value = op;
-          option.textContent = op;
-          select.appendChild(option);
-        });
-      }
-    } else {
-      console.log("No hay menús disponibles");
-      for (let i = 1; i <= 5; i++) {
-        const select = document.getElementById(`menu${i}`);
-        const option = document.createElement("option");
-        option.value = "";
-        option.textContent = "No hay menús disponibles";
-        select.appendChild(option);
+        document.getElementById(`dia${i}`).value = formatDate(monday);
+        monday.setDate(monday.getDate() + 1);
       }
     }
-  } catch (error) {
-    console.error('Error cargando los menús:', error);
-  }
-}
 
-window.onload = function () {
-  initializeDates();
-  applyParams(); // Cargar la empresa
-  loadMenuOptions(); // Cargar los menús desde el Google Apps Script
-};
-</script>
+    function getParams() {
+      const params = {};
+      location.search.substr(1).split("&").forEach(item => {
+        const [key, value] = item.split("=");
+        if (key) params[key] = decodeURIComponent(value);
+      });
+      return params;
+    }
 
+    function applyParams() {
+      const params = getParams();
+      if (params.empresa) {
+        document.getElementById("empresa").value = params.empresa;
+      }
+    }
+
+    async function loadMenuOptions() {
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxwQoI2iXhYldiJhVxHZzEUh6BnpHrJ6D47lIz_9lHqJAgCh7FOEDF1PXydhmDU69mi-g/exec');
+        const opciones = await response.json();
+        for (let i = 1; i <= 5; i++) {
+          const select = document.getElementById(`menu${i}`);
+          select.innerHTML = "";
+          if (opciones.length) {
+            opciones.forEach(op => {
+              const opt = document.createElement("option"); opt.value = op; opt.textContent = op;
+              select.appendChild(opt);
+            });
+          } else {
+            const none = document.createElement("option"); none.value = ""; none.textContent = "No hay menús disponibles";
+            select.appendChild(none);
+          }
+        }
+      } catch (e) {
+        console.error('Error al cargar menús:', e);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initializeDates();
+      applyParams();
+      loadMenuOptions().then(() => {
+        // Toggle contenido de cada bloque
+        document.querySelectorAll('.bloque .titulo').forEach(t => {
+          t.addEventListener('click', () => {
+            const c = t.nextElementSibling;
+            c.style.display = c.style.display === 'block' ? 'none' : 'block';
+          });
+        });
+
+        // Cambio de texto al enviar
+        const form = document.getElementById('pedidoForm');
+        const btn = document.getElementById('submitBtn');
+        form.addEventListener('submit', () => {
+          btn.textContent = 'Enviando...';
+          btn.disabled = true;
+        });
+      });
+    });
+  </script>
 </body>
 </html>
 
